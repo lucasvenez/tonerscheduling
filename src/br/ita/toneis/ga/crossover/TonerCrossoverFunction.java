@@ -15,27 +15,27 @@ public class TonerCrossoverFunction extends CrossoverFunction {
 	@Override
 	public Individual crossover(Individual i, Individual j) {
 		
+		int size = i.getGens().size();
+		
 		List<Integer> gens = new ArrayList<Integer>();
 		
-		for (int l = 0; l < i.getGens().size(); l++)
-			gens.add(-1);
+		for (int l = 0; l < i.getGens().size(); l++) gens.add(-1);
 		
 		int n = (int)floor(i.getGens().size() * super.crossoverPercentage);
-		
+
 		int initial = random.nextInt(i.getGens().size());
 		
-		for (int l = initial; l < initial + n; l++) {
-			gens.set(l, i.getGens().get(l));
-		}
+		for (int l = initial; l < initial + n; l++) gens.set(l % size, i.getGens().get(l % size));
 		
-		int m = 0;
-		
-		for (int l = 0; l < gens.size(); l++) 
-			if (gens.get(m) != -1) {
-				if (gens.contains(j.getGens().get(l)))
-					gens.set(m++, j.getGens().get(l));
-			}
+		for (int l = 0, m = 0; l < gens.size();) {
 			
+			if (gens.get(l) == -1) {
+				if (!gens.contains(j.getGens().get(m)))
+					gens.set(l++, j.getGens().get(m));
+				
+				m++;
+			} else l++;
+		}
 		
 		return new Individual(gens);
 	}

@@ -95,9 +95,14 @@ public class Population {
 	 * 
 	 */
 	public void crossover() {
+		
+		List<Individual> newGeneration = new ArrayList<Individual>();
+		
 		for (int i = 0; i < this.individuals.size() - 1; i++)
 			for (int j = i + 1; j < this.individuals.size(); j++)
-				this.crossover.crossover(this.individuals.get(i), this.individuals.get(j));		
+				newGeneration.add(this.crossover.crossover(this.individuals.get(i), this.individuals.get(j)));
+		
+		individuals.addAll(newGeneration);
 	}
 
 	/**
@@ -106,6 +111,8 @@ public class Population {
 	public void calculateFitness() {
 		for (Individual i : this.individuals)
 			this.fitness.calculateFitness(i, this.ga.getBaseMatrix());
+		
+		Collections.sort(this.individuals, new IndividualComparator());
 	}
 
 	/**
@@ -121,18 +128,18 @@ public class Population {
 	 * @param numberOfIndividuals
 	 */
 	public void selectBestestIndividuals(int numberOfIndividuals) {
-		
+	
 		double best = this.ga.getBestestIndividual().getFitness();
 		
-		int bestIndex = -1;
+		if (best > individuals.get(0).getFitness()) 
+			this.ga.setBestestIndividual(individuals.get(0));	
+				
+		for (int i = 0; i < individuals.size(); i++) {
 		
-		for (int i = 0; i < individuals.size(); i++)
-			if (best < individuals.get(i).getFitness()) {
-				bestIndex = i;
-				best = individuals.get(i).getFitness();
-			}
-
-		if (bestIndex > -1)
-			this.ga.setBestestIndividual(individuals.get(bestIndex));		
+			if (i > numberOfIndividuals - 1) {
+				individuals.remove(i);
+				i--;
+			}			
+		}			
 	}
 }

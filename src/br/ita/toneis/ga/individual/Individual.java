@@ -7,7 +7,7 @@ import java.util.List;
  * 
  * @author Lucas Venezian Povoa
  */
-public class Individual {
+public class Individual implements Comparable<Individual> {
 
 	private List<Integer> gens = new ArrayList<Integer>();
 	
@@ -39,5 +39,10 @@ public class Individual {
 
 	public void setFitness(double fitness) {
 		this.fitness = fitness;
+	}
+
+	@Override
+	public int compareTo(Individual individual) {
+		return (int)(this.fitness - individual.getFitness());
 	}
 }

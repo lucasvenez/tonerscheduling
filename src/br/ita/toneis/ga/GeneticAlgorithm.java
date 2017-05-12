@@ -1,5 +1,7 @@
 package br.ita.toneis.ga;
 
+import java.util.List;
+
 import br.ita.toneis.ga.crossover.TonerCrossoverFunction;
 import br.ita.toneis.ga.fitness.TonerFitnessFunction;
 import br.ita.toneis.ga.individual.Individual;
@@ -27,11 +29,13 @@ public class GeneticAlgorithm {
 				new TonerMutationFunction());
 	}
 
-	public Individual search(Individual individual) {
+	public Individual search() {
 
-		this.bestestIndividual = individual;
+		List<Integer> gens = Helper.generateIdentityArray(this.baseMatrix.getNumberOfRows());
+		
+		this.bestestIndividual = new Individual(gens);
 
-		this.population.generateRandomPopulationFromIndividual(individual, this.numberOfIndividuals);
+		this.population.generateRandomPopulationFromIndividual(this.bestestIndividual, this.numberOfIndividuals);
 
 		this.population.calculateFitness();
 
@@ -41,6 +45,8 @@ public class GeneticAlgorithm {
 
 		do {
 
+			System.out.println("Step " + (i + 1) + " of 100.");
+			
 			this.population.crossover();
 
 			this.population.mutation();
@@ -72,5 +78,16 @@ public class GeneticAlgorithm {
 
 	public void setBestestIndividual(Individual individual) {
 		this.bestestIndividual = individual;		
+	}
+	
+	public void printMatrix() {
+		
+		for (int i : this.bestestIndividual.getGens()) {
+		
+			for (int j = 0; j < this.baseMatrix.getNumberOfColumns(); j++)
+				System.out.println(this.baseMatrix.getValueAt(i, j) + " ");
+			
+			System.out.println();	
+		}
 	}
 }
