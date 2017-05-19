@@ -22,8 +22,20 @@ public class Main {
 		
 		long start = System.currentTimeMillis();
 
-		try (Stream<Path> paths = Files.walk(Paths.get("/home/lucas/workspace/toneis/resources"))) {
-
+		PrintWriter pw = null;
+		
+		try {
+			pw = new PrintWriter(new File("performance_analysis.csv"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("file,n,m,n_x_m,time,fitness,maxtoner\n");
+		
+		try (Stream<Path> paths = Files.walk(Paths.get("C:/Users/Lucas Venezian Povoa/git/tonerscheduling/resources"))) {
+			
 			paths.forEach(filePath -> {
 
 				if (Files.isRegularFile(filePath)) {
@@ -31,18 +43,6 @@ public class Main {
 					SparseMatrix matrix = loader.loadFileAsSparseMatrix(filePath.toString());
 
 					for (int j = 0; j < 1; j++) {
-						
-						PrintWriter pw = null;
-						try {
-							pw = new PrintWriter(new File("performance_analysis.csv"));
-							
-							if (j == 0)
-								pw.write("file,n,m,time,fitness\n");
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						}
-						
-						StringBuilder sb = new StringBuilder();
 						
 						GeneticAlgorithm ga = new GeneticAlgorithm(matrix);
 
@@ -56,22 +56,28 @@ public class Main {
 
 						int m = matrix.getNumberOfColumns();
 
-						sb.append("'")
-						  .append(filePath.toString().split("/")[6])
-						  .append("'")
+						int maxToner = ga.getMaxToner(i, matrix);
+						
+						sb.append("'").append(filePath).append("'")
 						  .append(",")
-						  .append(n).append(",").append(m).append(",")
-						  .append(time).append(",").append(fitness);
+						  .append(n).append(",").append(m).append(",").append(n*m)
+						  .append(",")
+						  .append(time)
+						  .append(",")
+						  .append(fitness)
+						  .append(",")
+						  .append(maxToner)
+						  .append("\n");
 						
-						System.out.println(sb.toString());
-						
-						pw.write(sb.append("\n").toString());
-						
-						pw.close();
+						System.out.println("'" + filePath + "'," + n + "," + m + "," + (n*m) + "," + time + "," + fitness + "," + maxToner);
 					}
 				}
 			});
 		}
+		
+		pw.write(sb.toString());
+		
+		pw.close();
 		
         System.out.println("done!");
 	}

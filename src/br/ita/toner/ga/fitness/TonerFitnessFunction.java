@@ -12,7 +12,6 @@ public class TonerFitnessFunction implements FitnessFunction {
 
 	private final Set<Integer> notRequestedToner = new HashSet<Integer>();
 
-	@Override
 	public double calculateFitness(Individual individual, SparseMatrix matrix) {
 
 		int max = 0;

@@ -1,11 +1,12 @@
 package br.ita.toner.ga.crossover;
 
 import static java.lang.Math.floor;
+import static java.lang.Math.min;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import br.ita.toner.ga.Helper;
 import br.ita.toner.ga.individual.Individual;
 
 public class TonerCrossoverFunction extends CrossoverFunction {
@@ -15,15 +16,20 @@ public class TonerCrossoverFunction extends CrossoverFunction {
 	@Override
 	public Individual crossover(Individual i, Individual j) {
 		
+		
+		for (int m : i.getGens())
+			System.out.print(m + ",");
+		
+		System.out.println();
+		
+		
 		int size = i.getGens().size();
 		
-		List<Integer> gens = new ArrayList<Integer>();
+		List<Integer> gens = Helper.generateEmptySet(size);
 		
-		for (int l = 0; l < i.getGens().size(); l++) gens.add(-1);
-		
-		int n = (int)floor(i.getGens().size() * super.crossoverPercentage);
-
 		int initial = random.nextInt(i.getGens().size());
+		
+		int n = min(size / 2, (int)floor(i.getGens().size() * super.crossoverPercentage));
 		
 		for (int l = initial; l < initial + n; l++) gens.set(l % size, i.getGens().get(l % size));
 		
@@ -36,6 +42,11 @@ public class TonerCrossoverFunction extends CrossoverFunction {
 				m++;
 			} else l++;
 		}
+		
+		for (int m : gens)
+			System.out.print(m + ",");
+		
+		System.out.println();		
 		
 		return new Individual(gens);
 	}

@@ -14,4 +14,13 @@ public class Helper {
 		
 		return identity;		
 	}
+	
+	public static List<Integer> generateEmptySet(int size) {
+		
+		List<Integer> result = new ArrayList<Integer>();
+		
+		for (int l = 0; l < size; l++) result.add(-1);
+		
+		return result;
+	}
 }

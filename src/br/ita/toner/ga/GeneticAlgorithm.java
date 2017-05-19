@@ -11,9 +11,9 @@ import br.ita.toner.ga.mutation.TonerMutationFunction;
 
 public class GeneticAlgorithm {
 
-	protected int generations = 800;
+	protected int generations = 5;
 	
-	protected int numberOfIndividuals = 80;
+	protected int numberOfIndividuals = 100;
 
 	protected SparseMatrix baseMatrix;
 
