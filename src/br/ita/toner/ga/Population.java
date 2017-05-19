@@ -113,11 +113,6 @@ public class Population {
 			this.fitness.calculateFitness(i, this.ga.getBaseMatrix());
 		
 		Collections.sort(this.individuals, new IndividualComparator());
-		
-		for(Individual iii : individuals)
-			System.out.print(iii.getFitness());
-		
-		System.out.println();
 	}
 
 	/**
@@ -139,12 +134,10 @@ public class Population {
 		if (best > individuals.get(0).getFitness()) 
 			this.ga.setBestestIndividual(individuals.get(0));	
 				
-		for (int i = 0; i < individuals.size(); i++) {
-		
+		for (int i = 0; i < individuals.size(); i++)
 			if (i > numberOfIndividuals - 1) {
 				individuals.remove(i);
 				i--;
-			}			
-		}			
+			}					
 	}
 }

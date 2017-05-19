@@ -4,7 +4,7 @@ import br.ita.toner.ga.individual.Individual;
 
 public abstract class MutationFunction {
 
-	protected double mutationProbability = 0.05;
+	protected double mutationProbability = 0.5;
 	
 	public abstract void mutation(Individual individual);
 

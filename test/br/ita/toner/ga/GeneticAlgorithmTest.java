@@ -9,20 +9,19 @@ import br.ita.toner.ga.individual.SparseMatrix;
 
 public class GeneticAlgorithmTest {
 
+	DataLoader loader = new DataLoader();
+	
 	@Test
 	public void test() {
-	
-		DataLoader loader = new DataLoader();
 		
 		SparseMatrix matrix = 
 				loader.loadFileAsSparseMatrix(
-					"/home/lucas/workspace/toneis/resources/938.txt");
+						"/home/lucas/workspace/toneis/resources/0.txt");
 		
 		GeneticAlgorithm ga = new GeneticAlgorithm(matrix);
 		
 		Individual i = ga.search();
 		
-		for (int ind : i.getGens())
-			System.out.print(ind + " ");		
+		System.out.println(ga.getMaxToner(i, ga.baseMatrix));
 	}
 }
