@@ -16,9 +16,9 @@ public class DataLoader {
 			
 			String line = br.readLine();
 			
-			int n = Integer.parseInt(line.split(" ")[0]) + 1;
+			int n = Integer.parseInt(line.split(" ")[0]);
 			
-			int m = Integer.parseInt(line.split(" ")[1]) + 1;
+			int m = Integer.parseInt(line.split(" ")[1]);
 			
 			matrix = new SparseMatrix(n, m);
 			

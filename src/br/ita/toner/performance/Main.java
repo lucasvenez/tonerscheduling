@@ -20,8 +20,6 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		long start = System.currentTimeMillis();
-
 		PrintWriter pw = null;
 		
 		try {
@@ -34,7 +32,7 @@ public class Main {
 		
 		sb.append("file,n,m,n_x_m,time,fitness,maxtoner\n");
 		
-		try (Stream<Path> paths = Files.walk(Paths.get("C:/Users/Lucas Venezian Povoa/git/tonerscheduling/resources"))) {
+		try (Stream<Path> paths = Files.walk(Paths.get("/home/lucas/git/tonerscheduling/resources"))) {
 			
 			paths.forEach(filePath -> {
 
@@ -46,6 +44,8 @@ public class Main {
 						
 						GeneticAlgorithm ga = new GeneticAlgorithm(matrix);
 
+						long start = System.currentTimeMillis();
+						
 						Individual i = ga.search();
 
 						double time = (System.currentTimeMillis() - start) / 1000.0;

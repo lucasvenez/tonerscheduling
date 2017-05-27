@@ -36,6 +36,9 @@ public class TonerFitnessFunction implements FitnessFunction {
 		}
 		
 		for (int j = 0; j < matrix.getNumberOfColumns(); j++) {
+			
+			maxList.set(j, -1);
+			
 			for (int i = individual.getGens().size() - 1; i >= 0 ; i--) {
 				if (matrix.getValueAt(individual.getGens().get(i), j) == 1) {
 					maxList.set(j, i);
@@ -55,6 +58,8 @@ public class TonerFitnessFunction implements FitnessFunction {
 			if (currentMax > max)
 				max = currentMax;
 		}
+		
+		individual.setFitness(max);
 		
 		return max;
 	}	

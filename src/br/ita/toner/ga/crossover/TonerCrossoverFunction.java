@@ -14,14 +14,7 @@ public class TonerCrossoverFunction extends CrossoverFunction {
 	private final Random random = new Random();
 	
 	@Override
-	public Individual crossover(Individual i, Individual j) {
-		
-		
-		for (int m : i.getGens())
-			System.out.print(m + ",");
-		
-		System.out.println();
-		
+	public Individual crossover(Individual i, Individual j) {		
 		
 		int size = i.getGens().size();
 		
@@ -41,12 +34,7 @@ public class TonerCrossoverFunction extends CrossoverFunction {
 				
 				m++;
 			} else l++;
-		}
-		
-		for (int m : gens)
-			System.out.print(m + ",");
-		
-		System.out.println();		
+		}	
 		
 		return new Individual(gens);
 	}
