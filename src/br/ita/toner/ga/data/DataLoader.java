@@ -3,6 +3,9 @@ package br.ita.toner.ga.data;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
 
 import br.ita.toner.ga.individual.SparseMatrix;
 
@@ -36,5 +39,31 @@ public class DataLoader {
 		}
 		
 		return matrix;
+	}
+	
+	public List<BitSet> loadFileAsBitSetList(String filePath) {
+		
+		List<BitSet> result = new ArrayList<BitSet>();
+		
+		try(BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
+			
+			String line = br.readLine();				
+			
+		    for(int i = 0; (line = br.readLine()) != null; i++) {
+		    	
+		    	String[] numbers = line.split(" ");
+		    	
+		    	result.add(new BitSet());
+		    	
+		    	for (int j = 0; j < numbers.length; j++)
+		    		if (numbers[j].equals("1"))
+		    			result.get(i).set(j);
+		    }
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		
+		return result;
 	}
 }
