@@ -1,7 +1,8 @@
 package br.ita.toner.answer;
+
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
-import java.util.Vector;
 
 public class BitSetAnswer implements Answer<List<BitSet>> {
 
@@ -9,23 +10,36 @@ public class BitSetAnswer implements Answer<List<BitSet>> {
 	public int getAnswer(List<BitSet> receitas) {
 		int n = receitas.size();
 		if(n == 0) return -1;
-		
-		List<BitSet> cumulativeOr = new Vector<BitSet>(n);
+		List<BitSet> suffix = new ArrayList<BitSet>();
 		for(int i = 0; i < n; i++) {
-			cumulativeOr.add(new BitSet());
+			suffix.add(new BitSet());
 		}
-		cumulativeOr.get(n-1).or(receitas.get(n-1));
+		suffix.get(n-1).or(receitas.get(n-1));
 		for(int i = n - 2; i >= 0; i--) {
-			cumulativeOr.get(i).or(cumulativeOr.get(i+1));
-			cumulativeOr.get(i).or(receitas.get(i));
+			suffix.get(i).or(suffix.get(i+1));
+			suffix.get(i).or(receitas.get(i));
 		}
-		int ans = 0;
-		BitSet currentMask = receitas.get(0);
-		ans = Math.max(ans, currentMask.cardinality());
+		int active = 0, ans = 0;
+		BitSet prefix = receitas.get(0);
+		ans = active = Math.max(ans, prefix.cardinality());
 		for(int i = 1; i < n; i++) {
-			currentMask.and(cumulativeOr.get(i));
-			currentMask.or(cumulativeOr.get(i));
-			ans = Math.max(ans, currentMask.cardinality());
+			int in = 0, out = 0;
+			int len = Math.max(receitas.get(i-1).length(), suffix.get(i).length());
+			for(int j = 0; j < len; j++) {
+				if(receitas.get(i-1).get(j) && !suffix.get(i).get(j)) {
+					out++;
+				}
+			}
+			len = Math.max(receitas.get(i).length(), prefix.length());
+			for(int j = 0; j < len; j++) {
+				if(receitas.get(i).get(j) && !prefix.get(j)) {
+					in++;
+				}
+			}
+			active += in;
+			active -= out;
+			prefix.or(receitas.get(i));
+			ans = Math.max(ans, active);
 		}
 		return ans;
 	}
