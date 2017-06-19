@@ -3,7 +3,7 @@ package br.ita.toner.ga.mutation;
 import java.util.List;
 import java.util.Random;
 
-import br.ita.toner.ga.individual.Individual;
+import br.ita.toner.data.Individual;
 
 public class TonerMutationFunction extends MutationFunction {
 

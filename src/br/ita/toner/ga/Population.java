@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import br.ita.toner.data.Individual;
 import br.ita.toner.ga.crossover.CrossoverFunction;
 import br.ita.toner.ga.fitness.FitnessFunction;
-import br.ita.toner.ga.individual.Individual;
 import br.ita.toner.ga.mutation.MutationFunction;
 
 /**
@@ -66,12 +66,11 @@ public class Population {
 
 			List<Integer> newGens = new ArrayList<Integer>();
 			
-			for (int g : individual.getGens())
-				newGens.add(g);
+			for (int g : individual.getGens()) newGens.add(g);
 			
 			Collections.shuffle(newGens);
 			
-			individuals.add(new Individual(newGens));
+			individuals.add(new Individual(individual.getSparseMatrix(), newGens));
 		}
 	}
 	

@@ -1,6 +1,6 @@
 package br.ita.toner.ga.crossover;
 
-import br.ita.toner.ga.individual.Individual;
+import br.ita.toner.data.Individual;
 
 public abstract class CrossoverFunction {
 

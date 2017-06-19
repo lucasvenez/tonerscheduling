@@ -9,10 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+import br.ita.toner.data.DataLoader;
+import br.ita.toner.data.Individual;
+import br.ita.toner.data.SparseMatrix;
 import br.ita.toner.ga.GeneticAlgorithm;
-import br.ita.toner.ga.data.DataLoader;
-import br.ita.toner.ga.individual.Individual;
-import br.ita.toner.ga.individual.SparseMatrix;
 
 public class Main {
 

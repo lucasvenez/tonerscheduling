@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-import br.ita.toner.ga.individual.Individual;
+import br.ita.toner.data.Individual;
 import br.ita.toner.ga.mutation.MutationFunction;
 import br.ita.toner.ga.mutation.TonerMutationFunction;
 
@@ -20,7 +20,7 @@ public class TonerMutationFunctionTest {
 		
 		gens.add(1); gens.add(0); gens.add(2);
 		
-		Individual i = new Individual(gens);
+		Individual i = new Individual(null, gens);
 		
 		MutationFunction mf = new TonerMutationFunction();
 		

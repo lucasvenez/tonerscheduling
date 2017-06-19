@@ -1,6 +1,6 @@
 package br.ita.toner.ga.mutation;
 
-import br.ita.toner.ga.individual.Individual;
+import br.ita.toner.data.Individual;
 
 public abstract class MutationFunction {
 

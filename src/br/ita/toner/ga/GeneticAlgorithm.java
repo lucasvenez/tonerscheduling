@@ -3,10 +3,10 @@ package br.ita.toner.ga;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ita.toner.data.Individual;
+import br.ita.toner.data.SparseMatrix;
 import br.ita.toner.ga.crossover.TonerCrossoverFunction;
 import br.ita.toner.ga.fitness.TonerFitnessFunction;
-import br.ita.toner.ga.individual.Individual;
-import br.ita.toner.ga.individual.SparseMatrix;
 import br.ita.toner.ga.mutation.TonerMutationFunction;
 
 public class GeneticAlgorithm {
@@ -34,7 +34,7 @@ public class GeneticAlgorithm {
 
 		List<Integer> gens = Helper.generateIdentityArray(this.baseMatrix.getNumberOfRows());
 		
-		this.bestestIndividual = new Individual(gens);
+		this.bestestIndividual = new Individual(this.baseMatrix, gens);
 
 		this.population.generateRandomPopulationFromIndividual(this.bestestIndividual, this.numberOfIndividuals);
 

@@ -2,7 +2,7 @@ package br.ita.toner.ga;
 
 import java.util.Comparator;
 
-import br.ita.toner.ga.individual.Individual;
+import br.ita.toner.data.Individual;
 
 public class IndividualComparator implements Comparator<Individual> {
 

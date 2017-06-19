@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import br.ita.toner.data.Individual;
 import br.ita.toner.ga.crossover.TonerCrossoverFunction;
-import br.ita.toner.ga.individual.Individual;
 
 public class TonerCrossoverFunctionTest {
 
@@ -23,7 +23,7 @@ public class TonerCrossoverFunctionTest {
 		
 		cross.crossoverPercentage = .1;
 		
-		for (int i : cross.crossover(new Individual(g1), new Individual(g2)).getGens())
+		for (int i : cross.crossover(new Individual(null, g1), new Individual(null, g2)).getGens())
 			System.out.print(i + " ");
 		
 		System.out.println();		

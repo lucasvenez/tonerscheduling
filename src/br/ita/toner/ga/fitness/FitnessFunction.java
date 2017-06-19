@@ -1,7 +1,7 @@
 package br.ita.toner.ga.fitness;
 
-import br.ita.toner.ga.individual.Individual;
-import br.ita.toner.ga.individual.SparseMatrix;
+import br.ita.toner.data.Individual;
+import br.ita.toner.data.SparseMatrix;
 
 public interface FitnessFunction {
 	

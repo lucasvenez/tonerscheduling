@@ -2,7 +2,7 @@ package br.ita.toner.ga.individual;
 
 import org.junit.Test;
 
-import br.ita.toner.ga.individual.SparseMatrix;
+import br.ita.toner.data.SparseMatrix;
 
 import static org.junit.Assert.*;
 

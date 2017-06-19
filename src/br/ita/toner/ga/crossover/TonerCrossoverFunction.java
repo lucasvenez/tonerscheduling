@@ -6,8 +6,8 @@ import static java.lang.Math.min;
 import java.util.List;
 import java.util.Random;
 
+import br.ita.toner.data.Individual;
 import br.ita.toner.ga.Helper;
-import br.ita.toner.ga.individual.Individual;
 
 public class TonerCrossoverFunction extends CrossoverFunction {
 
@@ -36,6 +36,6 @@ public class TonerCrossoverFunction extends CrossoverFunction {
 			} else l++;
 		}	
 		
-		return new Individual(gens);
+		return new Individual(i.getSparseMatrix(), gens);
 	}
 }

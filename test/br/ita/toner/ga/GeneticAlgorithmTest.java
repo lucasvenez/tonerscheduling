@@ -2,10 +2,10 @@ package br.ita.toner.ga;
 
 import org.junit.Test;
 
+import br.ita.toner.data.DataLoader;
+import br.ita.toner.data.Individual;
+import br.ita.toner.data.SparseMatrix;
 import br.ita.toner.ga.GeneticAlgorithm;
-import br.ita.toner.ga.data.DataLoader;
-import br.ita.toner.ga.individual.Individual;
-import br.ita.toner.ga.individual.SparseMatrix;
 
 public class GeneticAlgorithmTest {
 

@@ -1,16 +1,12 @@
 package br.ita.toner.ga.fitness;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import br.ita.toner.ga.individual.Individual;
-import br.ita.toner.ga.individual.SparseMatrix;
+import br.ita.toner.data.Individual;
+import br.ita.toner.data.SparseMatrix;
 
 public class TonerFitnessFunction implements FitnessFunction {
-
-	private final Set<Integer> notRequestedToner = new HashSet<Integer>();
 
 	public double calculateFitness(Individual individual, SparseMatrix matrix) {
 
@@ -63,40 +59,4 @@ public class TonerFitnessFunction implements FitnessFunction {
 		
 		return max;
 	}	
-	
-	public double calculateFitness2(Individual individual, SparseMatrix matrix) {
-
-		int fitness = 0;
-
-		for (int j = 0; j < matrix.getNumberOfColumns(); j++) {
-
-			int distance = 0;
-
-			boolean hasToner = false;
-
-			if (!notRequestedToner.contains(j)) {
-				
-				for (int i = 0; i < matrix.getNumberOfRows(); i++) {
-
-					int value = matrix.getValueAt(individual.getGens().get(i), j);
-
-					if (value == 1 && !hasToner) {
-						hasToner = true;
-					} else if (value == 1 && hasToner) {
-						fitness += distance;
-						distance = 0;
-					} else if (value == 0 && hasToner) {
-						distance++;
-					}
-				}
-			}
-			
-			if (distance == 0.0)
-				notRequestedToner.add(j);
-		}
-
-		individual.setFitness(fitness);
-
-		return fitness;
-	}
 }
