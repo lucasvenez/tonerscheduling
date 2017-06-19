@@ -1,20 +1,18 @@
 package br.ita.toner.algorithm;
 
-import static java.lang.Math.ceil;
-
 import java.util.List;
 
+import br.ita.toner.cluster.KMeans;
 import br.ita.toner.data.Individual;
 import br.ita.toner.data.SparseMatrix;
 import br.ita.toner.ga.Helper;
-import br.ita.toner.kmeans.KMeans;
 import br.ita.toner.pd.Solver;
 
 public class ClusterBacktrack {
 
 	private int clusterSize = 20;
 	
-	private final KMeans kmeans = new KMeans();
+	private final KMeans kmeans = new KMeans(this.clusterSize);
 	
 	/**
 	 * 
@@ -23,9 +21,23 @@ public class ClusterBacktrack {
 	 */
 	public Individual apply(Individual requests) {
 	
-		// split sample in k clusters of 20 instances
-		List<Individual> clusters = 
-				kmeans.getClusters(requests, (int)ceil(requests.getSize() / (double)clusterSize));
+		/*
+		 * FIXME Add recursion stop condition
+		 */
+		
+		/*
+		 * split sample in k clusters of 20 instances
+		 */
+		
+		List<Individual> clusters = null;
+		
+		try {
+			clusters = kmeans.getClusters(requests);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		clusters.removeIf(individual -> individual.getSize() == 0);
 		
 		SparseMatrix matrix = new SparseMatrix(
 				clusters.size(), requests.getSparseMatrix().getNumberOfColumns());
@@ -35,7 +47,7 @@ public class ClusterBacktrack {
 		for (Individual i : clusters) {
 			
 			/*
-			 * FIXME get index to backtrack
+			 * FIXME get new order index to backtrack
 			 * sort each clusters using Dynamic Programming
 			 */
 			Solver solver = new Solver(i.toBitSetList());
@@ -44,7 +56,7 @@ public class ClusterBacktrack {
 			/*
 			 * reduce a cluster to a unique instance using or operation 
 			 */
-			matrix.setBitSet(index++, i.getRepresentativeIndividual());
+			matrix.setBitSet(index++, matrix.getNumberOfColumns(), i.getRepresentativeIndividual());
 		}
 		
 		/*

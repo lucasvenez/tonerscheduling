@@ -161,7 +161,16 @@ public class SparseMatrix {
 		return result;
 	}
 
-	public void setBitSet(int i, BitSet representativeIndividual) {
-		// FIXME Auto-generated method stub		
+	public void setBitSet(int i, int numberOfColumns, BitSet representativeIndividual) {
+		for (int j = 0; j < numberOfColumns; j++)
+			if (representativeIndividual.get(j))
+				this.addPair(i, j);
+	}
+
+	public boolean getBooleanValueAt(int i, int j) {
+		
+		this.checkIndexLimits(i, j);
+		
+		return this.elements.contains(this.pairToAtomic(i, j));
 	}
 }

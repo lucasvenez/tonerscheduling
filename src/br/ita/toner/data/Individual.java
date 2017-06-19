@@ -6,6 +6,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import weka.core.Attribute;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.SparseInstance;
+
 /**
  * 
  * @author Lucas Venezian Povoa
@@ -168,10 +173,42 @@ public class Individual implements Comparable<Individual> {
 	}
 
 	public List<BitSet> toBitSetList() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<BitSet> bitSetList = new ArrayList<BitSet>();
+		
+		for (int i : this.requestsIDs) {
+			
+			BitSet bitSet = new BitSet();
+			
+			for (int j = 0; j < this.matrix.getNumberOfColumns(); j++)
+				
+				bitSet.set(j, this.matrix.getBooleanValueAt(i, j));
+				
+		}
+		
+		return bitSetList;
 	}
-	
-	
+
+	public Instances toInstances() {
+		
+		ArrayList<Attribute> attributes = new ArrayList<Attribute>();
+		
+		for (int i = 0; i < this.matrix.getNumberOfColumns(); i++)
+			attributes.add(new Attribute("color" + i));
+		
+		Instances instances = new Instances("requests", attributes, this.matrix.getNumberOfColumns());
+		
+		for (int i = 0; i < this.requestsIDs.size(); i++) {
+			
+			Instance instance = new SparseInstance(this.matrix.getNumberOfColumns());
+			
+			for (int j = 0; j < this.matrix.getNumberOfColumns(); j++)
+				instance.setValue(attributes.get(j), this.matrix.getValueAt(i, j));
+			
+			instances.add(instance);
+		}
+		
+		return instances;
+	}	
 }
  
