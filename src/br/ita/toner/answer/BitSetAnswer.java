@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
-public class BitSetAnswer implements Answer<List<BitSet>> {
+public class BitSetAnswer implements Answerable<List<BitSet>> {
 
 	@Override
-	public int getAnswer(List<BitSet> receitas) {
+	public int getAnswer(final List<BitSet> receitas) {
 		int n = receitas.size();
 		if(n == 0) return -1;
 		List<BitSet> suffix = new ArrayList<BitSet>();
@@ -20,7 +20,7 @@ public class BitSetAnswer implements Answer<List<BitSet>> {
 			suffix.get(i).or(receitas.get(i));
 		}
 		int active = 0, ans = 0;
-		BitSet prefix = receitas.get(0);
+		BitSet prefix = (BitSet) receitas.get(0).clone();
 		ans = active = Math.max(ans, prefix.cardinality());
 		for(int i = 1; i < n; i++) {
 			int in = 0, out = 0;
