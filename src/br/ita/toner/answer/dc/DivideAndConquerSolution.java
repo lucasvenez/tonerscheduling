@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
-import br.ita.toner.answer.Answer;
+import br.ita.toner.answer.Answerable;
 import br.ita.toner.answer.BitSetAnswer;
 
-public class DivideAndConquerSolution implements  Answer<List<BitSet>> {
+public class DivideAndConquerSolution implements  Answerable<List<BitSet>> {
 	public static final int DP_MAX_VALUE = 23;
 	
 	@Override
