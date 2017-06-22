@@ -1,6 +1,9 @@
 package br.ita.toner.ga.individual;
 
+import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -89,5 +92,22 @@ public class SparseMatrix {
 	
 	public int getNumberOfColumns() {
 		return this.numberOfColumns;
+	}
+	
+	public List<BitSet> toBitSetList() {
+		
+		List<BitSet> result = new ArrayList<BitSet>();
+		
+		for (int i = 0; i < this.numberOfRows; i++ )
+			result.add(new BitSet());
+		
+		for (Integer e : this.elements) {
+		
+			int[] index = this.atomicToPair(e);
+			
+			result.get(index[0]).set(index[1]);
+		}		
+		
+		return result;
 	}
 }

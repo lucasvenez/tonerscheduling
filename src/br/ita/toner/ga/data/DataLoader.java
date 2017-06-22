@@ -43,36 +43,35 @@ public class DataLoader {
 	}
 	
 public TestCase loadFileAsBitsetList(String filePath) {		
-		try(BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
+    try(BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
 			
-			String line = br.readLine();
-			
-			int n = Integer.parseInt(line.split(" ")[0]);			
-			int m = Integer.parseInt(line.split(" ")[1]);	
-			
-			List<BitSet> answer = new ArrayList<>();
+        String line = br.readLine();
 						
-		    for(int i = 0; i < n; i++) {		    	
-		    	line = br.readLine();
-		    	String[] numbers = line.split(" ");
+        int m = Integer.parseInt(line.split(" ")[1]);	
+			
+        List<BitSet> answer = new ArrayList<>();
+						
+        for(int i = 0; i < n; i++) {		    	
+            line = br.readLine();
+            String[] numbers = line.split(" ");
 		    	
-		    	BitSet curr_line = new BitSet();
+            BitSet curr_line = new BitSet();
 		    	
-		    	for (int j = 0; j < numbers.length; j++) {
-		    		if (numbers[j].equals("1")) {
-		    			curr_line.set(j);
-		    		}
-		    	}
+            for (int j = 0; j < numbers.length; j++) {
+                if (numbers[j].equals("1")) {
+                    curr_line.set(j);
+                }
+            }
 		    	
-		    	answer.add(curr_line);
-		    }
+            answer.add(curr_line);
+        }
 		    
-		    TestCase test = new TestCase(n, m, answer);
+        TestCase test = new TestCase(n, m, answer);
 		    
-			return test;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("Failed to load input file");
-		}
+        return test;
+    } catch (Exception e) {
+        e.printStackTrace();
+        throw new RuntimeException("Failed to load input file");
+    }
 	}
 }
