@@ -42,6 +42,7 @@ public class DataLoader {
 	}
 	
 	public List<BitSet> loadFileAsBitsetList(String filePath) {		
+		
 		try(BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
 			
 			String line = br.readLine();
