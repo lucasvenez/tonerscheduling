@@ -3,10 +3,12 @@ package br.ita.toner.pd.test;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 
 import org.junit.Test;
 
+import br.ita.toner.answer.BitSetAnswer;
 import br.ita.toner.data.TestCase;
 import br.ita.toner.ga.data.DataLoader;
 import br.ita.toner.pd.DynamicProgrammingSolver;
@@ -23,6 +25,27 @@ public class DynamicProgrammingSolverTest {
 		assertEquals(6, solver.getSolutionAsInt());
 	}
 	
+	@Test
+	public void testCasoPolemico() {
+		DataLoader loader = new DataLoader();
+		
+		TestCase input = loader.loadFileAsBitsetList("/home/aajjbb/Devel/tonerscheduling/resources/38.txt");
+		
+		DynamicProgrammingSolver solver = new DynamicProgrammingSolver(input);	
+
+		int solutionAsInt = solver.getSolutionAsInt();
+		List<Integer> solutionAsList = solver.getSolutionAsList();
+		
+		List<BitSet> solutionAsBitsetList = new ArrayList<>();
+		
+		for (Integer i : solutionAsList) {
+			solutionAsBitsetList.add(input.getReceitas().get(i));
+		}
+		
+		BitSetAnswer answerer = new BitSetAnswer();
+		
+		assertEquals(answerer.getAnswer(solutionAsBitsetList), solutionAsInt);
+	}
 	@Test
 	public void testListOutput() {
 		DataLoader loader = new DataLoader();

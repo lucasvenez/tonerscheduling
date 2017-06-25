@@ -20,16 +20,9 @@ public class DynamicProgrammingSolver {
 	public DynamicProgrammingSolver(TestCase test) {
 		this.receitas = test.getReceitas();
 		this.N = test.getN();
-		this.M = test.getM();
+		this.M = test.getM() + 1;
 
-		BitSet wholeEntry = new BitSet();
-
-		// Isto e feito por que o bitset do Java possui tamanho variado
-		for (int i = 0; i < this.receitas.size(); i++) {
-			wholeEntry.or(this.receitas.get(i));
-		}
-
-		this.largestPossibleAnswer = wholeEntry.cardinality() + 1;
+		this.largestPossibleAnswer = this.M;
 
 		this.orderList = new ArrayList<>();
 

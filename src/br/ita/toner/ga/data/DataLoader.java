@@ -46,7 +46,8 @@ public TestCase loadFileAsBitsetList(String filePath) {
     try(BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
 			
         String line = br.readLine();
-						
+        
+        int n = Integer.parseInt(line.split(" ")[0]);
         int m = Integer.parseInt(line.split(" ")[1]);	
 			
         List<BitSet> answer = new ArrayList<>();
