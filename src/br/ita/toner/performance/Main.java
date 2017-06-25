@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+import br.ita.toner.answer.IndividualAnswer;
 import br.ita.toner.data.DataLoader;
 import br.ita.toner.data.Individual;
 import br.ita.toner.data.SparseMatrix;
@@ -56,7 +57,7 @@ public class Main {
 
 						int m = matrix.getNumberOfColumns();
 
-						int maxToner = ga.getMaxToner(i, matrix);
+						int maxToner = new IndividualAnswer().getAnswer(i);
 						
 						sb.append("'").append(filePath).append("'")
 						  .append(",")

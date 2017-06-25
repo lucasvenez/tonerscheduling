@@ -45,6 +45,7 @@ public class PaintGraphCluster implements Clusterable<List<BitSet>> {
 	 * @param receitas
 	 * @param paints
 	 */
+	@SuppressWarnings("unchecked")
 	public PaintGraphCluster(List<BitSet> receitas, int paints) {
 		
 		this.receitas = receitas;

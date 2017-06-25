@@ -1,4 +1,4 @@
-package br.ita.toner.algorithm;
+package br.ita.toner.backtrack;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +12,7 @@ import br.ita.toner.pd.DynamicProgrammingSolver;
 /**
  * <b>Algorithm</b>
  * <ul>
- * <li>Cluster</li>
+ * <li>Generate Clusters</li>
  * <li>Sort elements of each cluster</li>
  * <li>Reduce clusters into a unique</li>
  * <li>Call function to order reduction</li>
@@ -20,6 +20,8 @@ import br.ita.toner.pd.DynamicProgrammingSolver;
  * <li>Transform cluster into a unique individual</li>
  * <li>Return it</li>
  * </ul>
+ * 
+ * TODO Paralyze clusters sort
  */
 public class ClusterBacktrack {
 
@@ -93,5 +95,10 @@ public class ClusterBacktrack {
 			gens.addAll(clusters.get(i).getGens());
 				
 		return new Individual(requests.getSparseMatrix(), gens);
+	}
+
+	public Individual sort(SparseMatrix matrix) {
+		return this.apply(new Individual(matrix, Helper.generateIdentityArray(matrix.getNumberOfRows())));
+		
 	}	
 }

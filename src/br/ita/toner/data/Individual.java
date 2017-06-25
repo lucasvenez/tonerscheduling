@@ -183,6 +183,8 @@ public class Individual implements Comparable<Individual> {
 			for (int j = 0; j < this.matrix.getNumberOfColumns(); j++)
 				
 				bitSet.set(j, this.matrix.getBooleanValueAt(i, j));
+			
+			bitSetList.add(bitSet);
 				
 		}
 		
