@@ -157,7 +157,6 @@ public class PaintGraphCluster implements Clusterable<List<BitSet>> {
 				return 0;
 			
 			return degree < o.degree ? -1 : 1;
-			
 		}
 	}
 	

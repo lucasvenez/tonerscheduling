@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import br.ita.toner.ga.data.DataLoader;
+import br.ita.toner.data.DataLoader;
 import br.ita.toner.pd.DynamicProgrammingSolver;
 
 public class DynamicProgrammingSolverTest {

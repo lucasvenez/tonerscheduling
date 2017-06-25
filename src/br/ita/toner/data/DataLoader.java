@@ -39,29 +39,34 @@ public class DataLoader {
 		return matrix;
 	}
 	
-	public List<BitSet> loadFileAsBitSetList(String filePath) {
-		
-		List<BitSet> result = new ArrayList<BitSet>();
+	public List<BitSet> loadFileAsBitsetList(String filePath) {		
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
 			
-			String line = br.readLine();				
+			String line = br.readLine();
+						
+			int m = Integer.parseInt(line.split(" ")[1]);	
 			
-		    for(int i = 0; (line = br.readLine()) != null; i++) {
+			List<BitSet> answer = new ArrayList<>();
+						
+		    while ((line = br.readLine()) != null) {		    	
 		    	
 		    	String[] numbers = line.split(" ");
 		    	
-		    	result.add(new BitSet());
+		    	BitSet curr_line = new BitSet(m);
 		    	
 		    	for (int j = 0; j < numbers.length; j++)
 		    		if (numbers[j].equals("1"))
-		    			result.get(i).set(j);
-		    }
+		    			curr_line.set(j);
 
+		    	answer.add(curr_line);
+		    }
+		    
+			return answer;
+			
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
+			throw new RuntimeException("Failed to load input file");
 		}
-		
-		return result;
 	}
 }
