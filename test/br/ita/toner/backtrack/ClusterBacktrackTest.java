@@ -15,15 +15,12 @@ public class ClusterBacktrackTest {
 	public void test() {
 		
 		SparseMatrix matrix = 
-				loader.loadFileAsSparseMatrix(
-						"/home/lucas/git/tonerscheduling/resources/0.txt");
+				loader.loadFileAsSparseMatrix("/home/lucas/git/tonerscheduling/resources/577.txt");
 		
 		ClusterBacktrack backtrack = new ClusterBacktrack();
 		
 		Individual i = backtrack.sort(matrix);
 		
-		System.out.println(new IndividualAnswer().getAnswer(i));
-		
+		System.out.println(new IndividualAnswer().getAnswer(i));	
 	}
-
 }

@@ -16,7 +16,7 @@ public class GeneticAlgorithmTest {
 		
 		SparseMatrix matrix = 
 				loader.loadFileAsSparseMatrix(
-						"/home/lucas/git/tonerscheduling/resources/512.txt");
+						"/home/lucas/git/tonerscheduling/resources/577.txt");
 		
 		GeneticAlgorithm ga = new GeneticAlgorithm(matrix);
 		

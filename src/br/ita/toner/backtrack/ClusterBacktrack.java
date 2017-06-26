@@ -25,7 +25,7 @@ import br.ita.toner.pd.DynamicProgrammingSolver;
  */
 public class ClusterBacktrack {
 
-	private int clusterSize = 20;
+	private int clusterSize = 15;
 	
 	/**
 	 * 
@@ -37,19 +37,20 @@ public class ClusterBacktrack {
 		/*
 		 * Recursion stop condition
 		 */
-		if (requests.getSize() <= 20) {
-			DynamicProgrammingSolver solver = new DynamicProgrammingSolver(requests.toBitSetList());
+		if (requests.getSize() <= this.clusterSize) {
+			DynamicProgrammingSolver solver = new DynamicProgrammingSolver(requests.toBitSetList(), clusterSize);
 			return new Individual(requests.getSparseMatrix(), solver.getSolutionAsList());
 		}
 		
 		/*
-		 * split sample in k clusters of 20 instances
+		 * split sample in k clusters of 10 instances
 		 */
 		List<Individual> clusters = null;
 		
 		try {
 			final KMeans kmeans = new KMeans(requests);
 			clusters = kmeans.getClustersFromIndividual(this.clusterSize);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -64,8 +65,8 @@ public class ClusterBacktrack {
 			/*
 			 * sort each clusters using Dynamic Programming
 			 */
-			DynamicProgrammingSolver solver = new DynamicProgrammingSolver(i.toBitSetList());
-			new Individual(matrix, solver.getSolutionAsList());
+			DynamicProgrammingSolver solver = new DynamicProgrammingSolver(i.toBitSetList(), clusterSize);
+			i = new Individual(i.getSparseMatrix(), solver.getSolutionAsList());
 			
 			/*
 			 * reduce a cluster to a unique instance using or operation 
@@ -98,7 +99,11 @@ public class ClusterBacktrack {
 	}
 
 	public Individual sort(SparseMatrix matrix) {
-		return this.apply(new Individual(matrix, Helper.generateIdentityArray(matrix.getNumberOfRows())));
 		
-	}	
+		Individual result = this.apply(new Individual(matrix, Helper.generateIdentityArray(matrix.getNumberOfRows())));
+		
+		System.out.println(result.getSize());
+		
+		return result;
+	}
 }

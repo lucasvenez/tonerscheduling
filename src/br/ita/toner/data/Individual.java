@@ -150,15 +150,17 @@ public class Individual implements Comparable<Individual> {
 		
 		BitSet bits = new BitSet();
 		
-		for (int i = 0; i < this.requestsIDs.size(); i++) {
+		for (int j = 0; j < matrix.getNumberOfColumns(); j++)
+			bits.set(j, matrix.getBooleanValueAt(this.requestsIDs.get(0), j));
+		
+		for (int i = 1; i < this.requestsIDs.size(); i++) {
 			
 			BitSet currentBits = new BitSet();
 			
 			for (int j = 0; j < matrix.getNumberOfColumns(); j++)
-				if (matrix.getValueAt(this.requestsIDs.get(i), j) > 0)
-					currentBits.set(j);
+				currentBits.set(j, matrix.getBooleanValueAt(this.requestsIDs.get(i), j));
 			
-			bits.or(currentBits);
+			bits.and(currentBits);
 		}
 		
 		return bits;

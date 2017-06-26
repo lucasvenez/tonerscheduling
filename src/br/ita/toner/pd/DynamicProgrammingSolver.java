@@ -5,7 +5,8 @@ import java.util.BitSet;
 import java.util.List;
 
 public class DynamicProgrammingSolver {
-	public final int MAX_N = 20;
+
+	public int maxRequests = 20;
 	public final int MAX_M = 1000;
 	
 	private int N;
@@ -14,10 +15,16 @@ public class DynamicProgrammingSolver {
 	private int dp[][];
 	private List<Integer> orderList;
 	
+	
 	public DynamicProgrammingSolver(List<BitSet> receitas) {
+		this(receitas, 20);
+	}
+	
+	public DynamicProgrammingSolver(List<BitSet> receitas, int maxRequests) {
 		this.receitas = receitas;
 		this.N = receitas.size();
 		this.M = receitas.get(0).size();
+		this.maxRequests = maxRequests;
 		
 		//Isto e feito por que o bitset do Java possui tamanho variado
 		for (int i = 0; i < this.receitas.size(); i++) {
@@ -26,9 +33,8 @@ public class DynamicProgrammingSolver {
 		
 		this.orderList = new ArrayList<>();
 		
-		if (this.N > MAX_N) {
-			throw new RuntimeException("O tamanho da entrada nao e compativel com uma solucao por PD");
-		}
+		if (this.N > maxRequests)
+			throw new RuntimeException("O tamanho da entrada nao e compativel com uma solucao por PD: <" + N + ">, <" + maxRequests + ">");
 		
 		this.dp = new int[(1 << N)][M];
 	}
@@ -184,5 +190,13 @@ public class DynamicProgrammingSolver {
             
             retrievePath(call_mask, call_now, call_best);
         }
+	}
+
+	public int getMaxRequests() {
+		return maxRequests;
+	}
+
+	public void setMaxRequests(int maxRequests) {
+		this.maxRequests = maxRequests;
 	}
 }
