@@ -10,7 +10,7 @@ import br.ita.toner.ga.mutation.TonerMutationFunction;
 
 public class GeneticAlgorithm {
 
-	protected int generations = 40;
+	protected int generations = 10;
 	
 	protected int numberOfIndividuals = 5;
 
@@ -32,6 +32,33 @@ public class GeneticAlgorithm {
 	public Individual search() {
 
 		List<Integer> gens = Helper.generateIdentityArray(this.baseMatrix.getNumberOfRows());
+		
+		this.bestestIndividual = new Individual(this.baseMatrix, gens);
+
+		this.population.generateRandomPopulationFromIndividual(this.bestestIndividual, this.numberOfIndividuals);
+
+		this.population.calculateFitness();
+
+		this.population.selectBestestIndividuals(this.numberOfIndividuals);
+
+		int i = 0;
+
+		do {
+			
+			this.population.crossover();
+
+			this.population.mutation();
+
+			this.population.calculateFitness();
+
+			this.population.selectBestestIndividuals(this.numberOfIndividuals);
+
+		} while (++i < generations);
+
+		return this.bestestIndividual;
+	}
+	
+	public Individual search(List<Integer> gens) {
 		
 		this.bestestIndividual = new Individual(this.baseMatrix, gens);
 

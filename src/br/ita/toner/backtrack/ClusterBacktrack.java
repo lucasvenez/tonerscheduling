@@ -102,8 +102,6 @@ public class ClusterBacktrack {
 		
 		Individual result = this.apply(new Individual(matrix, Helper.generateIdentityArray(matrix.getNumberOfRows())));
 		
-		System.out.println(result.getSize());
-		
 		return result;
 	}
 }

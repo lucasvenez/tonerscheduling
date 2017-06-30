@@ -173,4 +173,6 @@ public class SparseMatrix {
 		
 		return this.elements.contains(this.pairToAtomic(i, j));
 	}
+	
+	
 }

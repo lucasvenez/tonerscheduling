@@ -98,8 +98,6 @@ public class KMeans implements Clusterable<List<BitSet>> {
 		return result;
 	}
 
-	
-	
 	@Override
 	public List<List<BitSet>> getClusters(int clusterSize) {
 		

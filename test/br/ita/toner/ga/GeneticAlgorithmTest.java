@@ -10,18 +10,23 @@ import br.ita.toner.data.SparseMatrix;
 public class GeneticAlgorithmTest {
 
 	DataLoader loader = new DataLoader();
-	
+
 	@Test
 	public void test() {
-		
-		SparseMatrix matrix = 
-				loader.loadFileAsSparseMatrix(
-						"/home/lucas/git/tonerscheduling/resources/577.txt");
-		
-		GeneticAlgorithm ga = new GeneticAlgorithm(matrix);
-		
-		Individual i = ga.search();
-		
-		System.out.println(new IndividualAnswer().getAnswer(i));
+
+		int files[] = new int[] {1364, 786, 779, 955, 962, 1131, 1139, 336, 350, 587, 581, 621, 603, 714, 711, 842,
+				830, 1010, 1017 };
+
+		for (int f : files) {
+
+			SparseMatrix matrix = 
+					loader.loadFileAsSparseMatrix("/home/lucas/git/tonerscheduling/resources/" + f + ".txt");
+
+			GeneticAlgorithm ga = new GeneticAlgorithm(matrix);
+
+			Individual i = ga.search();
+
+			System.out.println(new IndividualAnswer().getAnswer(i));
+		}
 	}
 }
